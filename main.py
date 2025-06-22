@@ -7,22 +7,26 @@ root.title("Калькулятор")
 def on_button_click(value):
     if value == "=":
         try:
-            result = eval(textbox.get("1.0", tk.END))
-            print(result)
-            textbox.delete("1.0", tk.END) 
+            expression = textbox.get("1.0", tk.END).strip()
+            result = eval(expression)
+            textbox.delete("1.0", tk.END)
             textbox.insert(tk.END, result)
         except ZeroDivisionError:
-            print("Что за жидкие движения")
-            textbox.delete("1.0", tk.END) 
-            textbox.insert(tk.END, "Что за жидкие движения!")
-        except Exception as e:
-            textbox.delete("1.0", tk.END) 
-            textbox.insert(tk.END, "Что за жидкие движения")
+            textbox.delete("1.0", tk.END)
+            textbox.insert(tk.END, "Что за  движения!")
+        except Exception:
+            textbox.delete("1.0", tk.END)
+            textbox.insert(tk.END, "Что за движения")
     elif value == "√":
-        koren = eval(textbox.get("1.0", tk.END))
-        sqrt_math = math.sqrt(koren)
-        textbox.delete("1.0", tk.END) 
-        textbox.insert(tk.END, sqrt_math)
+        try:
+            expression = textbox.get("1.0", tk.END).strip()
+            number = eval(expression)
+            sqrt_result = math.sqrt(number)
+            textbox.delete("1.0", tk.END)
+            textbox.insert(tk.END, sqrt_result)
+        except Exception:
+            textbox.delete("1.0", tk.END)
+            textbox.insert(tk.END, "Ошибка вычисления корня")
     elif value == "clear":
         textbox.delete("1.0", tk.END)
     else:
